@@ -1,2 +1,2 @@
-# vagrant-development-box
-The vagrant base box for all developers
+# Base Vagrant Box for Motesque development environment
+
