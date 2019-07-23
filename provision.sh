@@ -6,7 +6,7 @@ sudo apt-get update && sudo apt-get install -y \
  libbz2-dev libffi-dev libjpeg-dev wget vim \
  htop netcat pandoc jq net-tools ntp ffmpeg \
  libdbus-glib-1-dev  ghostscript git nfs-common curl libhdf5-dev zlib1g-dev \
- libcairo-dev libgirepository1.0-dev pkg-config swig cmake-curses-gui
+ libcairo-dev libgirepository1.0-dev pkg-config swig cmake-curses-gui gir1.2-gtk-3.0
 
 
 
@@ -47,6 +47,8 @@ mkdir -p ~/tmp && cd ~/tmp \
 #install all python 3 packages
 sudo pip3 install  --trusted-host pypi.motesque.com --index-url http://pypi.motesque.com:8181 --extra-index-url https://pypi.org/simple --find-links . -r /vagrant_shared/requirements_py3.txt
 sudo pip3 install jupyter==1.0.0
+sudo pip3 install jupyter_contrib_nbextensions
+sudo jupyter contrib nbextension install --user
 
 #install nodejs 8
 curl -sL https://deb.nodesource.com/setup_8.x | sudo -E bash -
@@ -68,6 +70,7 @@ mkdir -p ~/tmp && cd ~/tmp \
     && sudo tar xfz wiringPi-96344ff.tar.gz \
     && cd wiringPi-96344ff \
     && sudo ./build
+
 
 
 #cleanup
