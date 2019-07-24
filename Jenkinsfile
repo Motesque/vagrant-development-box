@@ -1,7 +1,7 @@
 /*
 
 Jenkinsfile
-ottobock
+vagrant-development-box
 
 */
 
