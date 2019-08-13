@@ -71,6 +71,24 @@ mkdir -p ~/tmp && cd ~/tmp \
     && cd wiringPi-96344ff \
     && sudo ./build
 
+#-------------------------------------------------
+# Install chrono
+#-------------------------------------------------
+mkdir /home/vagrant/chrono-build
+cd /home/vagrant
+git clone https://github.com/projectchrono/chrono.git
+cd /home/vagrant/chrono
+# git checkout f8f0edd40b5e4f0c2235da40a50f7c91ed45c153
+git checkout 466e7b64b74f4c69b2e03216a805b0f782a7020e
+cd /home/vagrant/chrono-build
+cmake -DCMAKE_BUILD_TYPE=Release -DENABLE_MODULE_PYTHON=ON -DENABLE_MODULE_POSTPROCESS=ON -DPYTHON_EXECUTABLE:FILEPATH=/usr/local/bin/python3 -DPYTHON_LIBRARY=/usr/local/lib/libpython3.so ../chrono -DUSE_BULLET_DOUBLE=ON
+make -j4
+sudo make install
+sed  -i '1 i export LD_LIBRARY_PATH=${LD_LIBRARY_PATH}:/usr/local/lib' /home/vagrant/.bashrc
+#sed  -i ‘1 i export PYTHONPATH=${PYTHONPATH}:/usr/local/share/chrono/python’ /home/vagrant/.bashrc
+sudo ln -s /usr/local/share/chrono/python/pychrono/ /usr/local/lib/python3.6/site-packages/pychrono
+
+source /home/vagrant/.bashrc
 
 
 #cleanup
