@@ -64,13 +64,6 @@ mkdir -p ~/tmp && cd ~/tmp \
     && sudo make install \
     && sudo ldconfig
 
-#install i2C rpi3 lib
-mkdir -p ~/tmp && cd ~/tmp \
-    && sudo wget https://download.motesque.com/wiringPi-96344ff.tar.gz \
-    && sudo tar xfz wiringPi-96344ff.tar.gz \
-    && cd wiringPi-96344ff \
-    && sudo ./build
-
 #-------------------------------------------------
 # Install chrono
 #-------------------------------------------------
