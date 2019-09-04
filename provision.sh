@@ -65,7 +65,7 @@ mkdir -p ~/tmp && cd ~/tmp \
     && sudo ldconfig
 
 # Install eigen3 (Chrono dependency)
-mkdir -p ~/tmp && cd ~/tmp \
+mkdir -p /tmp && cd /tmp \
     && sudo wget http://bitbucket.org/eigen/eigen/get/3.3.7.tar.gz \
     && sudo tar -xvzf 3.3.7.tar.gz \
 
