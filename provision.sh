@@ -6,9 +6,15 @@ sudo apt-get update && sudo apt-get install -y \
  libbz2-dev libffi-dev libjpeg-dev wget vim \
  htop netcat pandoc jq net-tools ntp ffmpeg \
  libdbus-glib-1-dev  ghostscript git nfs-common curl libhdf5-dev zlib1g-dev \
- libcairo-dev libgirepository1.0-dev pkg-config swig cmake-curses-gui gir1.2-gtk-3.0
+ libcairo-dev libgirepository1.0-dev pkg-config cmake-curses-gui gir1.2-gtk-3.0
 
-
+ mkdir -p ~/tmp && cd ~/tmp \
+   && wget http://prdownloads.sourceforge.net/swig/swig-3.0.12.tar.gz \
+   && tar -zxvf swig-3.0.12.tar.gz \
+   && cd swig-3.0.12 \
+   && sudo ./configure \
+   && sudo make -j4 \
+   && sudo make install \
 
 # virtual serial com port. Make sure vagrant user has permissions
 sudo modprobe -a ftdi_sio
@@ -64,6 +70,13 @@ mkdir -p ~/tmp && cd ~/tmp \
     && sudo make install \
     && sudo ldconfig
 
+# Install eigen3 (Chrono dependency)
+mkdir -p ~/tmp && cd ~/tmp \
+    && sudo wget http://bitbucket.org/eigen/eigen/get/3.3.7.tar.gz \
+    && sudo tar -xvzf 3.3.7.tar.gz \
+
+
+
 #-------------------------------------------------
 # Install chrono
 #-------------------------------------------------
@@ -72,9 +85,12 @@ cd /home/vagrant
 git clone https://github.com/projectchrono/chrono.git
 cd /home/vagrant/chrono
 # git checkout f8f0edd40b5e4f0c2235da40a50f7c91ed45c153
-git checkout 466e7b64b74f4c69b2e03216a805b0f782a7020e
+# git checkout 466e7b64b74f4c69b2e03216a805b0f782a7020e
+git checkout 88fb81d100d66acf2e1874eb71b975b5ce3455c7
 cd /home/vagrant/chrono-build
-cmake -DCMAKE_BUILD_TYPE=Release -DENABLE_MODULE_PYTHON=ON -DENABLE_MODULE_POSTPROCESS=ON -DPYTHON_EXECUTABLE:FILEPATH=/usr/local/bin/python3 -DPYTHON_LIBRARY=/usr/local/lib/libpython3.so ../chrono -DUSE_BULLET_DOUBLE=ON
+cmake -DCMAKE_BUILD_TYPE=Release -DENABLE_MODULE_PYTHON=ON -DENABLE_MODULE_POSTPROCESS=ON \
+ -DPYTHON_EXECUTABLE:FILEPATH=/usr/local/bin/python3 -DPYTHON_LIBRARY=/usr/local/lib/libpython3.so ../chrono \
+ -DUSE_BULLET_DOUBLE=ON -DEIGEN3_INCLUDE_DIR:PATH=~/tmp/eigen-eigen-323c052e1731 -DEIGEN3_DIR:PATH=~/tmp/eigen-eigen-323c052e1731
 make -j4
 sudo make install
 sed  -i '1 i export LD_LIBRARY_PATH=${LD_LIBRARY_PATH}:/usr/local/lib' /home/vagrant/.bashrc
