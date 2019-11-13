@@ -1,12 +1,44 @@
 
 # install general packages
-sudo apt-get update  && sudo apt-get install -y libsnappy-dev build-essential \
- usbutils curl  dfu-util  libsnappy-dev \
- libncursesw5-dev libgdbm-dev zlib1g-dev libsqlite3-dev tk-dev libssl-dev openssl liblapack-dev gfortran libatlas-base-dev \
- libbz2-dev libffi-dev libjpeg-dev wget vim \
- htop netcat pandoc jq net-tools ntp ffmpeg \
- libdbus-glib-1-dev  ghostscript git nfs-common curl libhdf5-dev zlib1g-dev \
- libcairo-dev libgirepository1.0-dev pkg-config cmake-curses-gui gir1.2-gtk-3.0
+sudo apt-get update  && sudo apt-get install -y \
+    build-essential \
+    cmake-curses-gui \
+    curl \
+    dfu-util \
+    ffmpeg \
+    gfortran \
+    ghostscript \
+    git \
+    gir1.2-gtk-3.0 \
+    htop \
+    jq \
+    libncursesw5-dev   \
+    libatlas-base-dev \
+    libbz2-dev  \
+    libcairo-dev \
+    libdbus-glib-1-dev \
+    libffi-dev \
+    libgdbm-dev  \
+    libgirepository1.0-dev \
+    libhdf5-dev  \
+    libjpeg-dev \
+    liblapack-dev \
+    libsqlite3-dev \
+    libsnappy-dev \
+    libssl-dev \
+    netcat \
+    net-tools \
+    nfs-common \
+    ntp \
+    openssl \
+    pandoc \
+    pkg-config \
+    tk-dev \
+    usbutils \
+    vim \
+    wget \
+    zlib1g-dev
+
 
 # virtual serial com port. Make sure vagrant user has permissions
 sudo modprobe -a ftdi_sio
@@ -27,8 +59,10 @@ source /home/vagrant/.bashrc
 
 # compile couchdb
 sudo apt-get --no-install-recommends -y install \
-    build-essential  pkg-config erlang \
-    libicu-dev libmozjs185-dev libcurl4-openssl-dev
+    erlang \
+    libicu-dev \
+    libmozjs185-dev \
+    libcurl4-openssl-dev
 
 mkdir -p ~/tmp && cd ~/tmp \
     && wget -nv http://mirrors.ibiblio.org/apache/couchdb/source/2.3.0/apache-couchdb-2.3.0.tar.gz \
