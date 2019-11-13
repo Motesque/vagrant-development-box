@@ -9,9 +9,9 @@ sudo apt-get update  && sudo apt-get install -y libsnappy-dev build-essential \
  libcairo-dev libgirepository1.0-dev pkg-config cmake-curses-gui gir1.2-gtk-3.0
 
 # virtual serial com port. Make sure vagrant user has permissions
-#sudo modprobe -a ftdi_sio
-#sudo modprobe -a usbserial
-#sudo gpasswd --add vagrant dialout
+sudo modprobe -a ftdi_sio
+sudo modprobe -a usbserial
+sudo gpasswd --add vagrant dialout
 
 
 set -e
