@@ -72,7 +72,7 @@ typing-extensions==3.7.4.1
 ujson==1.35
 urllib3==1.25.6
 urwid==2.0.1
-uvloop==0.13.0
+uvloop==0.14.0
 uWSGI==2.0.18
 WeasyPrint==50
 webencodings==0.5.1
