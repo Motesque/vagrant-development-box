@@ -48,7 +48,7 @@ sudo gpasswd --add vagrant dialout
 
 set -e
 sudo apt-get remove -y 'python3.*'
-PYTHON_VERSION=3.6.8
+PYTHON_VERSION=3.8.2
 cd /
 sudo wget -nv https://nyc3-download-01.motesque.com/packages/Python-$PYTHON_VERSION.linux-amd64.tar.gz \
     && sudo tar -zxf Python-$PYTHON_VERSION.linux-amd64.tar.gz  --strip-components=1 \
