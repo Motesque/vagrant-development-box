@@ -1,10 +1,14 @@
 
 # install general packages
 sudo apt-get update  && sudo apt-get install -y \
+    autotools-dev \
     build-essential \
     cmake-curses-gui \
     curl \
+    debhelper \
+    devscripts \
     dfu-util \
+    erlang \
     ffmpeg \
     gfortran \
     ghostscript \
@@ -21,11 +25,15 @@ sudo apt-get update  && sudo apt-get install -y \
     libgdbm-dev  \
     libgirepository1.0-dev \
     libhdf5-dev  \
+    libicu-dev \
+    libicu63 \
     libjpeg-dev \
     liblapack-dev \
+    libnspr4-dev \
     libsqlite3-dev \
     libsnappy-dev \
     libssl-dev \
+    lsb-release \
     netcat \
     net-tools \
     nfs-common \
@@ -33,11 +41,13 @@ sudo apt-get update  && sudo apt-get install -y \
     openssl \
     pandoc \
     pkg-config \
+    pkg-kde-tools \
     tk-dev \
     usbutils \
     vim \
     wget \
-    zlib1g-dev
+    zlib1g-dev \
+    zip
 
 
 # virtual serial com port. Make sure vagrant user has permissions
@@ -45,9 +55,8 @@ sudo modprobe -a ftdi_sio
 sudo modprobe -a usbserial
 sudo gpasswd --add vagrant dialout
 
-
 set -e
-sudo apt-get remove -y 'python3.*'
+
 PYTHON_VERSION=3.8.2
 cd /
 sudo wget -nv https://nyc3-download-01.motesque.com/packages/Python-$PYTHON_VERSION.linux-amd64.tar.gz \
@@ -57,20 +66,22 @@ sudo wget -nv https://nyc3-download-01.motesque.com/packages/Python-$PYTHON_VERS
 
 source /home/vagrant/.bashrc
 
-# compile couchdb
-sudo apt-get --no-install-recommends -y install \
-    erlang \
-    libicu-dev \
-    libmozjs185-dev \
-    libcurl4-openssl-dev
+# compile libmozjs185 for couchdb.
+cd  /tmp \
+    && git clone https://github.com/apache/couchdb-pkg.git \
+    && cd couchdb-pkg \
+    && make -j4 couch-js-debs PLATFORM=$(lsb_release -cs) > make-couch-js-debs.log 2> make-couch-js-debs-error.log
 
-mkdir -p ~/tmp && cd ~/tmp \
-    && wget -nv http://mirrors.ibiblio.org/apache/couchdb/source/2.3.0/apache-couchdb-2.3.0.tar.gz \
-    && tar -zxvf apache-couchdb-2.3.0.tar.gz \
-    && cd apache-couchdb-2.3.0 \
-    && ./configure --disable-docs \
-    && make release -j4 \
-    && sudo cp -r ~/tmp/apache-couchdb-2.3.0/rel/couchdb /usr/local/lib/couchdb
+# compile CouchDB 2.x
+cd /tmp/ \
+  && sudo apt-get install -y --allow-downgrades -f /tmp/couchdb-pkg/js/couch-libmozjs185-1.0_1.8.5-1.0.0*.deb \
+  && sudo apt-get install -y --allow-downgrades -f /tmp/couchdb-pkg/js/couch-libmozjs185-dev_1.8.5-1.0.0*.deb \
+  && wget https://archive.apache.org/dist/couchdb/source/2.3.0/apache-couchdb-2.3.0.tar.gz \
+  && tar -zxvf apache-couchdb-2.3.0.tar.gz \
+  && cd apache-couchdb-2.3.0 \
+  && ./configure --disable-docs \
+  && make release -j4 \
+  && sudo cp -r /tmp/apache-couchdb-2.3.0/rel/couchdb /usr/local/lib
 
 # compile wiring library
 mkdir -p ~/tmp && cd ~/tmp \
@@ -79,11 +90,14 @@ mkdir -p ~/tmp && cd ~/tmp \
     && cd wiringPi-96344ff \
     && sudo ./build
 
+#sudo apt-get remove -y 'python3.*'
+
 #install all python 3 packages needed in production
-sudo pip3 install  --trusted-host pypi.motesque.com \
-                    --index-url http://pypi.motesque.com:8181 \
+sudo pip3 install   --no-deps \
+                    --trusted-host pypi-buster.motesque.com \
+                    --index-url http://pypi-buster.motesque.com:8181 \
                     --extra-index-url https://pypi.org/simple \
-                    --no-deps --find-links . -r /vagrant_shared/requirements.txt
+                    --find-links . -r /vagrant_shared/requirements.txt
 
 # install python packages for local development.
 sudo pip3 install \
@@ -92,7 +106,7 @@ sudo pip3 install \
 
 sudo jupyter contrib nbextension install --user
 
-#install nodejs 8
+#install nodejs 12
 curl -sL https://deb.nodesource.com/setup_8.x | sudo -E bash -
 sudo apt-get install -y nodejs
 
