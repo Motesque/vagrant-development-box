@@ -19,7 +19,7 @@
 Vagrant.configure(2) do |config|
 
   config.vm.box = "debian/buster64"
-  #config.vm.network "private_network", type: "dhcp"
+  config.vm.network "private_network", type: "dhcp"
 
   if ENV['FIRST_RUN'] == 'true'
     config.vbguest.auto_update = false
