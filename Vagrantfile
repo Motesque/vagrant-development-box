@@ -19,16 +19,16 @@
 Vagrant.configure(2) do |config|
 
   config.vm.box = "debian/buster64"
-  config.vm.network "private_network", type: "dhcp"
+  #config.vm.network "private_network", type: "dhcp"
 
-  if ENV['FIRST_RUN'] == 'true'
-    config.vbguest.auto_update = false
+#   if ENV['FIRST_RUN'] == 'true'
+#     config.vbguest.auto_update = false
+#     config.vm.synced_folder ".", "/vagrant", disabled: true
+#   else
+    config.vbguest.auto_update = true
     config.vm.synced_folder ".", "/vagrant", disabled: true
-  else
-    config.vbguest.auto_update = false
-    config.vm.boot_timeout = 600
     config.vm.synced_folder ".", "/vagrant_shared"
-  end
+  #end
 
   # Provider-specific configuration so you can fine-tune various
   # backing providers for Vagrant. These expose provider-specific options.
