@@ -25,6 +25,7 @@ Vagrant.configure(2) do |config|
 #     config.vbguest.auto_update = false
 #     config.vm.synced_folder ".", "/vagrant", disabled: true
 #   else
+    config.vm.boot_timeout = 600
     config.vbguest.auto_update = true
     config.vm.synced_folder ".", "/vagrant", disabled: true
     config.vm.synced_folder ".", "/vagrant_shared"
