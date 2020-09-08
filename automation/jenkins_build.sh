@@ -10,6 +10,7 @@ cd $WORKSPACE
 export FIRST_RUN='true'
 vagrant up --no-provision
 vagrant ssh -c 'sudo apt-get -y update'
+vagrant ssh -c 'sudo apt-mark hold grub-pc'
 vagrant ssh -c 'DEBIAN_FRONTEND=noninteractive sudo DEBIAN_FRONTEND=noninteractiv apt-get -y upgrade'
 vagrant ssh -c 'sudo apt-get install -y build-essential linux-headers-amd64 linux-image-amd64'
 vagrant halt
