@@ -107,7 +107,7 @@ sudo pip3 install \
 sudo jupyter contrib nbextension install --user
 
 #install nodejs 12
-curl -sL https://deb.nodesource.com/setup_8.x | sudo -E bash -
+curl -sL https://deb.nodesource.com/setup_10.x | sudo -E bash -
 sudo apt-get install -y nodejs
 
 #install protocol buffer generator for python
