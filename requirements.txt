@@ -110,7 +110,7 @@ setproctitle==1.1.10
 six==1.12.0
 smbus-cffi==0.5.1
 sortedcontainers==2.1.0
-starlette==0.14.1
+starlette==0.13.6
 supervisor==4.1.0
 threadpoolctl==2.1.0
 tinycss2==1.0.2
@@ -135,3 +135,7 @@ WTForms==2.2.1
 xmlrunner==1.7.7
 yarl==1.5.0
 zope.interface==4.7.2
+iniconfig==1.1.1
+pluggy==0.13.1
+py==1.10.0
+toml==0.10.2
