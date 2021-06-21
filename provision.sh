@@ -37,6 +37,7 @@ sudo apt-get update  && sudo apt-get install -y \
     netcat \
     net-tools \
     nfs-common \
+    exfat-fuse \
     ntp \
     openssl \
     pandoc \
