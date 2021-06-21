@@ -9,14 +9,14 @@ sudo apt-get update  && sudo apt-get install -y \
     devscripts \
     dfu-util \
     erlang \
+    exfat-fuse \
     ffmpeg \
     gfortran \
     ghostscript \
-    git \
     gir1.2-gtk-3.0 \
+    git \
     htop \
     jq \
-    libncursesw5-dev   \
     libatlas-base-dev \
     libbz2-dev  \
     libcairo-dev \
@@ -29,14 +29,16 @@ sudo apt-get update  && sudo apt-get install -y \
     libicu63 \
     libjpeg-dev \
     liblapack-dev \
+    libncursesw5-dev \
     libnspr4-dev \
-    libsqlite3-dev \
     libsnappy-dev \
+    libsqlite3-dev \
     libssl-dev \
     lsb-release \
-    netcat \
     net-tools \
+    netcat \
     nfs-common \
+    ntfs-3g \
     ntp \
     openssl \
     pandoc \
@@ -46,8 +48,8 @@ sudo apt-get update  && sudo apt-get install -y \
     usbutils \
     vim \
     wget \
-    zlib1g-dev \
-    zip
+    zip \
+    zlib1g-dev
 
 
 # virtual serial com port. Make sure vagrant user has permissions
